@@ -1,0 +1,12 @@
+{
+	"folders": [
+		{
+			"path": "../../.."
+		},
+		{
+			"name": "skywalk-firmware",
+			"path": "../../../../PlatformIO/Projects/skywalk-firmware"
+		}
+	],
+	"settings": {}
+}
