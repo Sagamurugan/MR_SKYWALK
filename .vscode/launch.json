@@ -1,7 +1,6 @@
 {
   "version": "0.2.0",
   "configurations": [
-    
     {
       "name": "C/C++ Runner: Debug Session",
       "type": "cppdbg",
@@ -9,8 +8,8 @@
       "args": [],
       "stopAtEntry": false,
       "externalConsole": true,
-      "cwd": "c:/Users/sagam/Documents/MR_SKYWALK/skywalk-firmware/src",
-      "program": "c:/Users/sagam/Documents/MR_SKYWALK/skywalk-firmware/src/build/Debug/outDebug",
+      "cwd": "c:/Users/sagam/Documents/MR_SKYWALK/skywalk-firmware",
+      "program": "c:/Users/sagam/Documents/MR_SKYWALK/skywalk-firmware/build/Debug/outDebug",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [

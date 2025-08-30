@@ -9,7 +9,7 @@
 #include <Adafruit_MPU6050.h>
 #include <Adafruit_Sensor.h>
 #include <DHT.h>
-#include "HX711-ADC.h"
+#include "HX711_ADC.h" // <-- CORRECTED THIS LINE
 
 // --- Firebase Objects ---
 FirebaseData fbdo;
@@ -133,3 +133,4 @@ void loop() {
   // Wait 10 seconds before the next reading
   delay(10000);
 }
+
