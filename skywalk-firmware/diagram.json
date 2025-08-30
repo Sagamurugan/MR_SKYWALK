@@ -1,0 +1,29 @@
+{
+  "version": 1,
+  "author": "Saga Murugan S",
+  "editor": "wokwi",
+  "parts": [
+    { "type": "wokwi-esp32-devkit-v1", "id": "esp", "top": 0, "left": 0, "attrs": {} },
+    { "type": "wokwi-mpu6050", "id": "mpu", "top": -50, "left": 150, "attrs": {} },
+    { "type": "wokwi-dht22", "id": "dht", "top": 50, "left": 150, "attrs": {} },
+    { "type": "wokwi-hc-sr04", "id": "sr04", "top": 150, "left": 150, "attrs": {} },
+    { "type": "wokwi-hx711", "id": "hx711", "top": -150, "left": 150, "attrs": {} }
+  ],
+  "connections": [
+    [ "esp:GND", "mpu:GND", "black", [ "v0" ] ],
+    [ "esp:3V3", "mpu:VCC", "red", [ "v0" ] ],
+    [ "esp:D22", "mpu:SCL", "green", [ "v0" ] ],
+    [ "esp:D21", "mpu:SDA", "blue", [ "v0" ] ],
+    [ "esp:GND", "dht:GND", "black", [ "v0" ] ],
+    [ "esp:3V3", "dht:VCC", "red", [ "v0" ] ],
+    [ "esp:D4", "dht:SDA", "orange", [ "v0" ] ],
+    [ "esp:GND", "sr04:GND", "black", [ "v0" ] ],
+    [ "esp:VIN", "sr04:VCC", "red", [ "v0" ] ],
+    [ "esp:D19", "sr04:TRIG", "purple", [ "v0" ] ],
+    [ "esp:D18", "sr04:ECHO", "yellow", [ "v0" ] ],
+    [ "esp:GND", "hx711:GND", "black", [ "v0" ] ],
+    [ "esp:VIN", "hx711:VCC", "red", [ "v0" ] ],
+    [ "esp:D26", "hx711:DT", "gray", [ "v0" ] ],
+    [ "esp:D25", "hx711:SCK", "white", [ "v0" ] ]
+  ]
+}
