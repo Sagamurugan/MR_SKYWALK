@@ -1,10 +1,10 @@
-// src/components/Logo.jsx
+
 import React from 'react';
-import { useTheme } from '../context/ThemeContext'; // <-- IMPORT THEME HOOK
+import { useTheme } from '../context/ThemeContext'; 
 
 const Logo = () => {
-  const { theme } = useTheme(); // <-- GET CURRENT THEME
-  const textColor = theme === 'dark' ? 'white' : '#111827'; // Set text color based on theme
+  const { theme } = useTheme(); 
+  const textColor = theme === 'dark' ? 'white' : '#111827'; 
 
   return (
     <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>

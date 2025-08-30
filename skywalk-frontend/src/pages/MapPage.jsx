@@ -1,7 +1,7 @@
-// src/pages/MapPage.jsx
+
 import React, { useState, useEffect } from 'react';
-import { collection, onSnapshot } from 'firebase/firestore'; // <-- Import Firestore functions
-import { db } from '../firebase'; // <-- Import your db instance
+import { collection, onSnapshot } from 'firebase/firestore'; 
+import { db } from '../firebase'; 
 import SensorDetailPanel from '../components/SensorDetailPanel';
 
 const getStatusClass = (status) => {
@@ -33,7 +33,7 @@ const MapPage = () => {
       setSensors(sensorsData);
     });
 
-    // Cleanup listener on component unmount
+    
     return () => unsubscribe();
   }, []);
 

@@ -1,7 +1,7 @@
-// src/components/MainLayout.jsx
+
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { Toaster } from 'react-hot-toast'; // <-- IMPORT THE TOASTER
+import { Toaster } from 'react-hot-toast'; 
 import Logo from './Logo';
 import Footer from './Footer';
 import ThemeToggle from './ThemeToggle';

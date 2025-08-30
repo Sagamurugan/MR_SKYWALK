@@ -1,8 +1,8 @@
-// src/components/Footer.jsx
+
 import React from 'react';
 
 const Footer = () => {
-  // Automatically gets the current year
+  
   const currentYear = new Date().getFullYear();
 
   return (

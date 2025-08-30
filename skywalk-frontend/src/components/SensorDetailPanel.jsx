@@ -1,14 +1,14 @@
-// src/components/SensorDetailPanel.jsx
+
 import React from 'react';
 import { Line } from 'react-chartjs-2';
 
-// --- FAKE DATA for the mini-chart ---
+
 const miniChartData = {
   labels: ['-30m', '-25m', '-20m', '-15m', '-10m', '-5m', 'now'],
   datasets: [
     {
       label: 'History',
-      data: [0.11, 0.13, 0.12, 0.15, 0.14, 0.18, 0.12], // This would be dynamic in a real app
+      data: [0.11, 0.13, 0.12, 0.15, 0.14, 0.18, 0.12], 
       borderColor: '#3b82f6',
       tension: 0.4,
     },

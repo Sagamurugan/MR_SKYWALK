@@ -1,12 +1,11 @@
-// src/pages/LoginPage.jsx
+
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../firebase';
 import { toast } from 'react-hot-toast';
-import EyeIcon from '../components/EyeIcon'; // <-- IMPORT NEW ICON
-import EyeSlashIcon from '../components/EyeSlashIcon'; // <-- IMPORT NEW ICON
-
+import EyeIcon from '../components/EyeIcon'; 
+import EyeSlashIcon from '../components/EyeSlashIcon'; 
 const LoginPage = () => {
   const [formData, setFormData] = useState({ email: '', password: '' });
   const [showPassword, setShowPassword] = useState(false);

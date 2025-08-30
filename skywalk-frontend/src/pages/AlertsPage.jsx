@@ -1,4 +1,4 @@
-// src/pages/AlertsPage.jsx
+
 import React, { useState, useEffect } from 'react';
 import { collection, onSnapshot, query, orderBy } from 'firebase/firestore';
 import { db } from '../firebase';
@@ -32,7 +32,7 @@ const AlertsPage = () => {
         alertsData.push({
           id: doc.id,
           ...data,
-          // Format the Firestore timestamp to a readable string
+          
           time: data.timestamp ? new Date(data.timestamp.seconds * 1000).toLocaleString() : 'No timestamp'
         });
       });

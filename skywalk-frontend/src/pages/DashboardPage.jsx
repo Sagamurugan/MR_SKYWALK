@@ -1,14 +1,14 @@
-// src/pages/DashboardPage.jsx
+
 import React, { useState, useEffect } from 'react';
 import { Line } from 'react-chartjs-2';
 import { toast } from 'react-hot-toast';
 import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend } from 'chart.js';
-import { doc, onSnapshot } from 'firebase/firestore'; // <-- Import Firestore functions
-import { db } from '../firebase'; // <-- Import your db instance
+import { doc, onSnapshot } from 'firebase/firestore'; 
+import { db } from '../firebase'; 
 
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend);
 
-// --- FAKE HISTORICAL DATA (we will make this real later) ---
+
 const historicalData = {
   labels: ['10:00', '10:05', '10:10', '10:15', '10:20', '10:25', '10:30'],
   datasets: [
@@ -38,10 +38,10 @@ const DataCard = ({ title, value, unit, icon }) => (
 );
 
 const DashboardPage = () => {
-  // State to hold the live sensor data
+  
   const [liveData, setLiveData] = useState({});
 
-  // useEffect to set up the real-time listener
+  
   useEffect(() => {
     const docRef = doc(db, 'live-data', 'latest');
 
@@ -53,7 +53,7 @@ const DashboardPage = () => {
       }
     });
 
-    // Cleanup listener on component unmount
+ 
     return () => unsubscribe();
   }, []);
 
