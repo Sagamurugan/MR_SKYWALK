@@ -1,0 +1,8 @@
+<!-- public/logo.svg -->
+<svg width="200" height="200" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M40 150 C60 100, 140 100, 160 150" stroke="#3b82f6" stroke-width="16" stroke-linecap="round"/>
+  <path d="M100 150 V 60" stroke="#3b82f6" stroke-width="16" stroke-linecap="round"/>
+  <path d="M100 60 L120 80" stroke="#3b82f6" stroke-width="16" stroke-linecap="round"/>
+  <path d="M100 60 L80 80" stroke="#3b82f6" stroke-width="16" stroke-linecap="round"/>
+  <path d="M100 40 m -5, 0 a 5,5 0 1,0 10,0 a 5,5 0 1,0 -10,0" fill="#3b82f6"/>
+</svg>
