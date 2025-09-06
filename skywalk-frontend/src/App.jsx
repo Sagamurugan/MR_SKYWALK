@@ -7,7 +7,7 @@ import DashboardPage from './pages/DashboardPage';
 import AlertsPage from './pages/AlertsPage';
 import SettingsPage from './pages/SettingsPage';
 import MapPage from './pages/MapPage';
-import MainLayout from './components/MainLayout'; // We will use a layout component
+import MainLayout from './components/MainLayout'; 
 
 function App() {
   return (
