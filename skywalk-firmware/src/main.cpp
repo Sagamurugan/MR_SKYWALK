@@ -5,10 +5,9 @@
 #include <HTTPClient.h>      // Library for sending email alerts
 
 // Sensor Libraries
+#include <DHT.h>
 #include <Adafruit_MPU6050.h>
 #include <Adafruit_Sensor.h>
-#include <DHT.h>
-#include "HX711_ADC.h"
 
 // --- Firebase Objects ---
 FirebaseData fbdo;
@@ -16,12 +15,8 @@ FirebaseAuth auth;
 FirebaseConfig config;
 
 // --- Sensor Objects & Pins ---
-Adafruit_MPU6050 mpu;
-DHT dht(4, DHT22);           // DHT sensor is connected to pin D4
-HX711_ADC LoadCell(26, 25); // HX711 DT pin is 26, SCK pin is 25
-
-const int trigPin = 19;
-const int echoPin = 18;
+DHT dht(4, DHT11); // DHT sensor is connected to pin D4
+Adafruit_MPU6050 mpu; // MPU-6050 sensor object
 
 void setup() {
   Serial.begin(115200);
@@ -46,19 +41,14 @@ void setup() {
 
   // --- Initialize Sensors ---
   dht.begin();
+  Serial.println("DHT11 Initialized.");
+
   if (!mpu.begin()) {
     Serial.println("Critical Error: Failed to find MPU6050 chip. Halting.");
-    while (1) { delay(10); }
+    while (1) { delay(10); } 
   }
   Serial.println("MPU6050 Initialized.");
-
-  LoadCell.begin();
-  LoadCell.start(2000, true); // Tare the scale on startup
-  LoadCell.setCalFactor(420.0); // This value needs to be calibrated
-  Serial.println("Load Cell Initialized.");
-
-  pinMode(trigPin, OUTPUT);
-  pinMode(echoPin, INPUT);
+  
   Serial.println("All sensors initialized. Starting main loop...");
 }
 
@@ -67,65 +57,48 @@ void loop() {
     Serial.println("--------------------");
     Serial.println("Reading sensor data...");
 
-    // --- Read all sensors ---
+    // --- Read REAL DHT11 sensor data ---
     float humidity = dht.readHumidity();
     float temperature = dht.readTemperature();
     
-    // Check if DHT read failed
     if (isnan(humidity) || isnan(temperature)) {
       Serial.println("Error: Failed to read from DHT sensor!");
-      delay(2000); // Wait before retrying
-      return; // Skip the rest of the loop
+      delay(2000);
+      return;
     }
 
+    // --- Read REAL MPU-6050 sensor data ---
     sensors_event_t a, g, temp;
     mpu.getEvent(&a, &g, &temp);
-    float vibration = a.acceleration.x;
+    float vibration = a.acceleration.x; // Using the X-axis acceleration as our vibration metric
 
-    LoadCell.update();
-    float load = LoadCell.getData();
-
-    // Read crowd sensor (ultrasonic)
-    digitalWrite(trigPin, LOW);
-    delayMicroseconds(5);
-    digitalWrite(trigPin, HIGH);
-    delayMicroseconds(10);
-    digitalWrite(trigPin, LOW);
-    long duration = pulseIn(echoPin, HIGH, 30000); // 30ms timeout
-    int distance = duration * 0.034 / 2;
-    
-    int crowd_count = (distance > 0 && distance < 100) ? 1 : 0;
+    // --- Placeholder data for sensors you don't have ---
+    float load = 0.00;
+    int crowd_count = 0;
 
     // --- Print values to Serial Monitor for debugging ---
     Serial.printf("Temp: %.2f C, Hum: %.2f %%\n", temperature, humidity);
-    Serial.printf("Vibration: %.2f g, Load: %.2f kg\n", vibration, load);
-    Serial.printf("Crowd Distance: %d cm, Count: %d\n", distance, crowd_count);
+    Serial.printf("Vibration: %.2f g\n", vibration);
 
-    // --- CORRECTED PLACEMENT for Email Alert ---
-    // This now checks the vibration value from the CURRENT reading.
-    float criticalVibration = 4.0;
+    // --- Check for Critical Conditions and Send Email Alert ---
+    float criticalVibration = 4.0; // Set your critical vibration threshold
     if (vibration > criticalVibration) {
       Serial.println("CRITICAL VIBRATION DETECTED! Sending FormSubmit email alert...");
-
       HTTPClient http;
-      // Replace with your actual email address
-      http.begin("https://formsubmit.co/sagamurugan7@gmail.com"); 
+      // REPLACE with your actual email address below
+      http.begin("https://formsubmit.co/your-email@example.com"); 
       http.addHeader("Content-Type", "application/x-www-form-urlencoded");
       String alertMessage = "message=A critical vibration of " + String(vibration) + "g was detected on the skywalk. Please check the dashboard immediately.";
       int httpResponseCode = http.POST(alertMessage);
 
       if (httpResponseCode > 0) {
         Serial.printf("FormSubmit alert trigger sent, response code: %d\n", httpResponseCode);
-        String response = http.getString();
-        Serial.println(response);
       } else {
         Serial.printf("Error sending FormSubmit alert trigger: %s\n", http.errorToString(httpResponseCode).c_str());
       }
       http.end();
     }
-    // --- End of Email Alert Block ---
-
-
+    
     // --- Create a JSON object to send to Firebase ---
     FirebaseJson json;
     json.set("temperature", String(temperature, 2));
@@ -152,6 +125,8 @@ void loop() {
   // Wait 10 seconds before the next reading cycle
   delay(10000); 
 }
+
+
 
 
 

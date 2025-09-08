@@ -1,6 +1,6 @@
 {
   "hosting": {
-    "public": "dist",
+    "public": "skywalk-frontend/dist",
     "ignore": [
       "firebase.json",
       "**/.*",
